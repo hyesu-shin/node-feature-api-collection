@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  server:
+    env_file:
+      - ~/.env/.env.server
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    container_name: server
+    volumes:
+      - ~/.env/.env.server:/server/.env
+    ports:
+      - "8002:8002"
+    networks:
+      - default-network
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 3s
+        max_attempts: 5
+        window: 60s
+
+networks:
+  default-network:
+    external:
+      name: default-network
+
