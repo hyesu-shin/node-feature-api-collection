@@ -3,13 +3,13 @@ import {Service} from 'typedi';
 import IndexService from '@/services/index'
 
 @Service()
-class TestService extends IndexService {
+class TestsService extends IndexService {
     constructor() {
         super();
     }
 
     async goTest() {
-        for (let i = 0; i < 1000; i++) {
+        for (let i = 0; i < 10; i++) {
             console.log(i);
         }
         return {code: 'ok', result: 1};
@@ -17,4 +17,4 @@ class TestService extends IndexService {
 
 }
 
-export default TestService;
+export default TestsService;

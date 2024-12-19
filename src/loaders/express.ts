@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 // config
-import config from 'src/controllers/config';
+import config from '@/controllers/config';
 
 import indexRouter from '@/apis';
 import errorHandler from '@/middlewares/errorHandler';
@@ -61,7 +61,7 @@ export default async ({app}: { app: Express }) => {
     }));
 
     // app.use(morganMiddleware);
-    app.use('/api/v1', indexRouter());
+    app.use('/', indexRouter());
     // app.use('/api/v1', indexRouter());
 
     // catch 404

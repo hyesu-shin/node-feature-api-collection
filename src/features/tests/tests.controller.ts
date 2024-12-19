@@ -1,15 +1,18 @@
 import {Container} from 'typedi';
-import {Request, Response, NextFunction} from 'express';
+import {Request, Response, NextFunction, RequestHandler} from 'express';
 
-import TestService from '@/services/tests/test.service';
+import TestsService from '@/features/tests/tests.service';
 
-const test: TestService = Container.get(TestService);
+const test: TestsService = Container.get(TestsService);
 
-
-const getTest = async (req: Request, res: Response, next: NextFunction) => {
-    return res.status(200).json({
+const getTest: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    res.status(200).json({
         result: 'ok',
-    })
+    });
+  } catch (err) {
+      next(err);
+  }
 }
 
 const getRedisTest = async (req: Request, res: Response, next: NextFunction) => {

@@ -1,9 +1,15 @@
 import express, {Express} from 'express';
 
-import config from 'src/controllers/config';
+import config from '@/controllers/config';
 import indexLoader from '@/loaders';
 
 const port = config.port;
+
+async function app(): Promise<Express> {
+  const app: Express = express();
+  await indexLoader({ expressApp: app });
+  return app;
+}
 
 async function startServer() {
     const app: Express = express();
@@ -27,3 +33,5 @@ startServer()
     .catch(err => {
         console.log(err);
     });
+
+export { app }

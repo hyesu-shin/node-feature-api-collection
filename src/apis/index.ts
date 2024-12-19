@@ -1,6 +1,6 @@
 import express, {Router} from 'express';
 
-import testRouter from '@/apis/routes/tests/test.route';
+import testsRouter from '@/apis/routes/tests/tests.route';
 
 export default () => {
     const app: Router = express.Router();
@@ -8,7 +8,7 @@ export default () => {
     /**
      * test
      */
-    testRouter({app});
+    testsRouter({app});
 
     return app;
 }
