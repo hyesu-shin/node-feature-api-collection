@@ -40,18 +40,21 @@
         - name: Generate Swagger Documentation
           run: npm run docs
 
-        - name: Upload Swagger JSON to Postman
+        - name: Convert Swagger Documentation to Postman Collection
+          run: npm run docs-convert
+
+        - name: Upload to Postman
           env:
             POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
             POSTMAN_COLLECTION_ID: ${{ secrets.POSTMAN_COLLECTION_ID }}
           run: |
-            SWAGGER_JSON_PATH="docs/swagger-output.json"
+            POSTMAN_JSON_PATH="./docs/postman-output.json"
 
             curl -X PUT \
               "https://api.getpostman.com/collections/$POSTMAN_COLLECTION_ID" \
               -H "X-Api-Key: $POSTMAN_API_KEY" \
               -H "Content-Type: application/json" \
-              --data @"$SWAGGER_JSON_PATH"
+              --data @"$POSTMAN_JSON_PATH"
 
       # - name: ec2 code upload
       #   uses: appleboy/scp-action@master
