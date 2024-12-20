@@ -10,7 +10,9 @@ Converter.convert({ type: 'string', data: openapiData },
       console.log('Could not convert', conversionResult.reason);
     }
     else {
-      const postmanCollection = conversionResult.output[0].data;
+      const postmanCollection = {
+        collection: conversionResult.output[0].data
+      }
       // console.log('The collection object is: ', postmanCollection);
 
       fs.writeFileSync(path.join(__dirname, 'postman-output.json'), JSON.stringify(postmanCollection, null, 2), 'utf-8');
