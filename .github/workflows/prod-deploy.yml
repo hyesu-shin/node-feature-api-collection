@@ -43,6 +43,9 @@
         - name: Convert Swagger Documentation to Postman Collection
           run: npm run docs-convert
 
+        - name: Install jq
+          run: sudo apt-get install jq
+
         - name: Upload to Postman
           env:
             POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
@@ -54,7 +57,7 @@
               "https://api.getpostman.com/collections/$POSTMAN_COLLECTION_ID" \
               -H "X-Api-Key: $POSTMAN_API_KEY" \
               -H "Content-Type: application/json" \
-              --data @"$POSTMAN_JSON_PATH"
+              --data @$(cat $POSTMAN_JSON_PATH | jq -c '{collection: .}')
 
       # - name: ec2 code upload
       #   uses: appleboy/scp-action@master
