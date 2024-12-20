@@ -8,8 +8,8 @@ beforeAll(async () => {
   server = appInstance.listen(8003);
 });
 
-afterAll(() => {
-  server.close();
+afterAll(async () => {
+  await server.close();
 });
 
 describe('GET /tests', () => {
