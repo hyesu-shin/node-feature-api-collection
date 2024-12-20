@@ -20,6 +20,16 @@
           }
         }
       }
+    },
+    "/message": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
     }
   }
 }
