@@ -13,14 +13,14 @@ type knexType = {
 const knexClient: knexType = {};
 
 const knexConfig: knexConfigType = {
-    mysqlV1: {
+    mysql: {
         client: 'mysql2',
         connection: {
             dateStrings: 'date',
-            host: config.mysqlV1.host,
-            user: config.mysqlV1.user,
-            password: config.mysqlV1.password,
-            database: config.mysqlV1.name,
+            host: config.mysql.host,
+            user: config.mysql.user,
+            password: config.mysql.password,
+            database: config.mysql.name,
         },
         pool: {
             min: 0,

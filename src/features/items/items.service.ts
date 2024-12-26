@@ -8,11 +8,11 @@ class ItemsService extends IndexService {
         super();
     }
 
-    async goTest() {
-        for (let i = 0; i < 10; i++) {
-            console.log(i);
-        }
-        return {code: 'ok', result: 1};
+    async getItems(data: any) {
+      console.log(data);
+      return {
+        code: 'ok'
+      }
     }
 
 }
