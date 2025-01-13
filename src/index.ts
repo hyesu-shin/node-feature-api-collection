@@ -28,10 +28,12 @@ async function startServer() {
     });
 }
 
-startServer()
+if (process.env.NODE_ENV !== 'test') {
+  startServer()
     .then()
     .catch(err => {
-        console.log(err);
+      console.log(err);
     });
+}
 
 export { app }

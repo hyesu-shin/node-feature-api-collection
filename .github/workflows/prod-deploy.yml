@@ -1,49 +1,59 @@
   # prod-deploy.yml
   # master branch 로 pull request 가 merge 되었을 때 실행됨
+  name: Deploy to EC2
 
   on:
-    pull_request:
-      types:
-      - closed
+    push:
       branches:
         - master
+        - develop
+
+  permissions:
+    id-token: write
+    contents: read
 
   jobs:
     deploy:
+      name: deploy
       runs-on: ubuntu-latest
       environment: production
 
       steps:
-        - name: Checkout Code
+        - name: check out the code
           uses: actions/checkout@v3
 
-        - name: Setup Node.js
+        - name: setup Node.js
           uses: actions/setup-node@v3
           with:
             node-version: '22'
 
-        - name: Cache Node Modules
+        - name: cache node modules
           uses: actions/cache@v3
           id: cache
           with:
             path: node_modules
             key: npm-packages-${{ hashFiles('./package-lock.json') }}
 
-        - name: Install Dependencies
+        - name: install dependencies
           if: steps.cache.outputs.cache-hit != 'true'
           run: npm install
           working-directory: ./
 
-        - name: Run Tests
+        - name: run build
+          run: npm run build
+
+        - name: run tests
+          env:
+            NODE_ENV: test
           run: npm run test
 
-        - name: Generate Swagger Documentation
+        - name: generate swagger documentation
           run: npm run docs
 
-        - name: Convert Swagger Documentation to Postman Collection
+        - name: convert swagger documentation to postman collection
           run: npm run docs-convert
 
-        - name: Upload to Postman
+        - name: upload to postman
           env:
             POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
             POSTMAN_COLLECTION_ID: ${{ secrets.POSTMAN_COLLECTION_ID }}
@@ -56,25 +66,30 @@
               -H "Content-Type: application/json" \
               --data @$POSTMAN_JSON_PATH
 
-      # - name: ec2 code upload
-      #   uses: appleboy/scp-action@master
-      #   with:
-      #     host: ${{ secrets.SERVER_HOST }}
-      #     username: ${{ secrets.SERVER_USERNAME }}
-      #     password: ${{ secrets.SERVER_PASSWORD }}
-      #     port: ${{ secrets.SERVER_PORT }}
-      #     source: "order/,!.git,!.github, !.gitignore"
-      #     target: "~/server"
-      #     strip_components: 1
-      #     overwrite: true
-      # - name: ec2 deploy
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: ${{ secrets.SERVER_HOST }}
-      #     username: ${{ secrets.SERVER_USERNAME }}
-      #     password: ${{ secrets.SERVER_PASSWORD }}
-      #     port: ${{ secrets.SERVER_PORT }}
-      #     script: |
-      #       cd ~/server
-      #       docker-compose -f docker-compose.prod.yml --env-file ~/.env/.env.server up -d --build
-      #       docker rmi $(docker images -f "dangling=true" -q)
+        - name: compress file
+          run: tar -czf dev-api.tar.gz dist/ node_modules/ src/ Dockerfile package-lock.json package.json
+
+        - name: configure AWS credentials
+          uses: aws-actions/configure-aws-credentials@v2
+          with:
+            role-to-assume: ${{ secrets.AWS_GITHUB_DEPLOY_ROLE}}
+            aws-region: ${{ secrets.AWS_REGION }}
+
+        - name: upload to S3
+          run: |
+            aws s3 cp dev-api.tar.gz s3://${{ secrets.S3_BUCKET_NAME }}/dev-api.tar.gz
+
+        - name: deploy using SSM
+          run: |
+              aws ssm send-command --document-name "AWS-RunShellScript" \
+                --targets "Key=instanceIds,Values=${{ secrets.EC2_INSTANCE_ID }}" \
+                --parameters 'commands=[
+                "aws s3 cp s3://${{ secrets.S3_BUCKET_NAME }}/dev-api.tar.gz /home/ec2-user/docker-nginx-web/dev-api/dev-api.tar.gz", 
+                "cd /home/ec2-user/docker-nginx-web/dev-api", 
+                "tar --overwrite -xzf dev-api.tar.gz", 
+                "sudo rm -rf dev-api.tar.gz", 
+                "docker-compose stop dev-api-server", 
+                "nohup docker-compose up -d --build dev-api-server > /dev/null 2>&1 &"
+                ]' \
+                --comment "Deploying dist with dev-api.tar.gz" \
+                --region ${{ secrets.AWS_REGION }}

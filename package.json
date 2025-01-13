@@ -4,8 +4,9 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "test": "jest --detectOpenHandles --forceExit",
-    "start": "tsc -p tsconfig.json && ts-node -r tsconfig-paths/register dist/index.js",
+    "test": "cross-env NODE_ENV=test jest --detectOpenHandles --forceExit --runInBand",
+    "build": "tsc -p tsconfig.json",
+    "start": "ts-node -r tsconfig-paths/register dist/src/index.js",
     "dev": "cross-env NODE_ENV=development ts-node-dev -r tsconfig-paths/register --watch -- src/index.ts",
     "lint": "eslint . --config eslint.config.js",
     "docs": "node docs/swagger.js",
