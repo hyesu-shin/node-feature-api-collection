@@ -1,10 +1,14 @@
 FROM node:22.11.0
 
-WORKDIR /server
+WORKDIR /app
+
+COPY pacakge*.json ./
+RUN npm install
 
 COPY . .
 
-ENV   HOST 0.0.0.0
+ENV HOST 0.0.0.0
+ENV PORT 8002
 
 EXPOSE 8002
 
