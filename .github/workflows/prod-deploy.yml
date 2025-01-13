@@ -89,8 +89,7 @@
                 "tar --overwrite -xzf dev-api.tar.gz", 
                 "sudo rm -rf dev-api.tar.gz", 
                 "docker-compose stop dev-api-server", 
-                "nohup docker-compose up -d --build dev-api-server > /dev/null 2>&1 &",
-                "nohup docker rmi $(docker images -f "dangling=true" -q) || true"
+                "nohup docker-compose up -d --build dev-api-server > /dev/null 2>&1 &"
                 ]' \
                 --comment "Deploying dist with dev-api.tar.gz" \
                 --region ${{ secrets.AWS_REGION }}
