@@ -62,7 +62,7 @@
               --data @$POSTMAN_JSON_PATH
 
         - name: compress file
-          run: tar -czf dev-api.tar.gz src/ Dockerfile package-lock.json package.json tsconfig.json
+          run: tar -czf dev-api.tar.gz node_modules/ src/ Dockerfile package-lock.json package.json tsconfig.json
 
         - name: configure AWS credentials
           uses: aws-actions/configure-aws-credentials@v2
