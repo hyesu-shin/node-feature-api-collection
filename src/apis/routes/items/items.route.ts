@@ -13,35 +13,38 @@ const router: Router = express.Router();
 const itemsController = new ItemsController();
 
 export default ({ app } : { app: Router }) => {
-    app.use('/api/v1', router);
+  app.use('/api/v1', router);
 
-    router.get(
-      '/items', 
-      validateGetItems,
-      itemsController.getItems(),
-    );
+  // #swagger.description = 'dd'
+  router.get(
+    '/items', 
+    validateGetItems,
+    (req, res, next) => {
+      return itemsController.getItems()(req, res, next);
+    }
+  );
 
-    router.get(
-      '/items/:id',
-      validateGetItemById,
-      itemsController.getItemsById(),
-    );
+  router.get(
+    '/items/:id',
+    validateGetItemById,
+    itemsController.getItemsById(),
+  );
 
-    router.post(
-      '/items', 
-      validateAddItems,
-      itemsController.addItems(),
-    );
+  router.post(
+    '/items', 
+    validateAddItems,
+    itemsController.addItems(),
+  );
 
-    router.put(
-      '/items/:id',
-      validateModifyItems,
-      itemsController.modifyItems(),
-    );
+  router.put(
+    '/items/:id',
+    validateModifyItems,
+    itemsController.modifyItems(),
+  );
 
-    router.delete(
-      '/items/:id',
-      validateDeleteItems,
-      itemsController.deleteItems(),
-    );
+  router.delete(
+    '/items/:id',
+    validateDeleteItems,
+    itemsController.deleteItems(),
+  );
 };

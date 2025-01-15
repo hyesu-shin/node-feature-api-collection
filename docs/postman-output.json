@@ -2,7 +2,7 @@
   "collection": {
     "item": [
       {
-        "id": "e032a026-61eb-46e9-9cf3-92f4bfb895d4",
+        "id": "fdf09f01-7ed3-4d5e-83df-0f79703c0864",
         "name": "/tests",
         "request": {
           "name": "/tests",
@@ -25,7 +25,7 @@
         },
         "response": [
           {
-            "id": "b6382bc4-b70c-4548-b157-99075c6180e4",
+            "id": "54a6b69e-728c-45e3-b0b5-128ee8cb4b9d",
             "originalRequest": {
               "url": {
                 "path": [
@@ -59,7 +59,7 @@
         }
       },
       {
-        "id": "ccd34c85-db5b-4e30-a879-3550201b7508",
+        "id": "e63f6543-f62d-4b8f-adee-3ae36f3f024f",
         "name": "/message",
         "request": {
           "name": "/message",
@@ -82,7 +82,7 @@
         },
         "response": [
           {
-            "id": "6f606f37-cefc-4e2c-b4ae-ff3eaa3044ee",
+            "id": "23f3e274-275f-4ad1-9eea-d75fe3a51b9c",
             "originalRequest": {
               "url": {
                 "path": [
@@ -114,18 +114,323 @@
         "protocolProfileBehavior": {
           "disableBodyPruning": true
         }
+      },
+      {
+        "id": "d7d597f2-c0eb-4857-a14e-9b9ee971fc7e",
+        "name": "items",
+        "item": [
+          {
+            "id": "628f8369-3968-4782-a873-815a8b6c27ad",
+            "name": "/items",
+            "request": {
+              "name": "/items",
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "url": {
+                "path": [
+                  "items"
+                ],
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "method": "GET",
+              "auth": null
+            },
+            "response": [
+              {
+                "id": "2c72a4ac-fadf-460b-b61b-2f18bc5c3aac",
+                "originalRequest": {
+                  "url": {
+                    "path": [
+                      "items"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "GET",
+                  "body": {}
+                },
+                "status": "Internal Server Error",
+                "code": 500,
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "text/plain"
+                  }
+                ],
+                "body": "",
+                "cookie": [],
+                "_postman_previewlanguage": "text"
+              }
+            ],
+            "event": [],
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            }
+          },
+          {
+            "id": "12705505-08a6-4b58-819e-e3f01237f72f",
+            "name": "/items",
+            "request": {
+              "name": "/items",
+              "description": {
+                "content": "",
+                "type": "text/plain"
+              },
+              "url": {
+                "path": [
+                  "items"
+                ],
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "method": "POST",
+              "auth": null
+            },
+            "response": [
+              {
+                "id": "76e4e5af-2c36-426c-b614-9da7df40eb38",
+                "originalRequest": {
+                  "url": {
+                    "path": [
+                      "items"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "POST",
+                  "body": {}
+                },
+                "status": "Internal Server Error",
+                "code": 500,
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "text/plain"
+                  }
+                ],
+                "body": "",
+                "cookie": [],
+                "_postman_previewlanguage": "text"
+              }
+            ],
+            "event": [],
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            }
+          },
+          {
+            "id": "1d9db154-24de-4299-ab40-431ee89f4fdf",
+            "name": "{id}",
+            "item": [
+              {
+                "id": "487c8fdd-9460-4daa-93b0-dd3c78d1eb9c",
+                "name": "/items/:id",
+                "request": {
+                  "name": "/items/:id",
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "url": {
+                    "path": [
+                      "items",
+                      ":id"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "GET",
+                  "auth": null
+                },
+                "response": [
+                  {
+                    "id": "d537e1a7-69df-4612-981e-73d6c6c405c7",
+                    "originalRequest": {
+                      "url": {
+                        "path": [
+                          "items",
+                          ":id"
+                        ],
+                        "host": [
+                          "{{baseUrl}}"
+                        ],
+                        "query": [],
+                        "variable": []
+                      },
+                      "method": "GET",
+                      "body": {}
+                    },
+                    "status": "Internal Server Error",
+                    "code": 500,
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "body": "",
+                    "cookie": [],
+                    "_postman_previewlanguage": "text"
+                  }
+                ],
+                "event": [],
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                }
+              },
+              {
+                "id": "3fd94fde-7c3f-4cdd-b7c3-1ce1e7746819",
+                "name": "/items/:id",
+                "request": {
+                  "name": "/items/:id",
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "url": {
+                    "path": [
+                      "items",
+                      ":id"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "PUT",
+                  "auth": null
+                },
+                "response": [
+                  {
+                    "id": "8ec8cc25-0d7b-4a52-b542-f0a34d7af076",
+                    "originalRequest": {
+                      "url": {
+                        "path": [
+                          "items",
+                          ":id"
+                        ],
+                        "host": [
+                          "{{baseUrl}}"
+                        ],
+                        "query": [],
+                        "variable": []
+                      },
+                      "method": "PUT",
+                      "body": {}
+                    },
+                    "status": "Internal Server Error",
+                    "code": 500,
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "body": "",
+                    "cookie": [],
+                    "_postman_previewlanguage": "text"
+                  }
+                ],
+                "event": [],
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                }
+              },
+              {
+                "id": "a4833d13-fcb8-4d13-b504-b74d3870cc3d",
+                "name": "/items/:id",
+                "request": {
+                  "name": "/items/:id",
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "url": {
+                    "path": [
+                      "items",
+                      ":id"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "DELETE",
+                  "auth": null
+                },
+                "response": [
+                  {
+                    "id": "70c9f799-f5a4-4806-8d6e-16f19d844f61",
+                    "originalRequest": {
+                      "url": {
+                        "path": [
+                          "items",
+                          ":id"
+                        ],
+                        "host": [
+                          "{{baseUrl}}"
+                        ],
+                        "query": [],
+                        "variable": []
+                      },
+                      "method": "DELETE",
+                      "body": {}
+                    },
+                    "status": "Internal Server Error",
+                    "code": 500,
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "body": "",
+                    "cookie": [],
+                    "_postman_previewlanguage": "text"
+                  }
+                ],
+                "event": [],
+                "protocolProfileBehavior": {
+                  "disableBodyPruning": true
+                }
+              }
+            ],
+            "event": []
+          }
+        ],
+        "event": []
       }
     ],
     "event": [],
     "variable": [
       {
         "type": "string",
-        "value": "http://localhost:3000/api/v1",
+        "value": "https://dev-api.inmyhands.site/api/v1",
         "key": "baseUrl"
       }
     ],
     "info": {
-      "_postman_id": "35fd5fd8-22e2-4541-a185-1b80b721a0fc",
+      "_postman_id": "12758e70-9686-41fb-9199-0a7af98c1fbd",
       "name": "node-feature-api-collection",
       "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
       "description": {
@@ -133,5 +438,11 @@
         "type": "text/plain"
       }
     }
-  }
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://dev-api.inmyhands.site"
+    }
+  ]
 }
