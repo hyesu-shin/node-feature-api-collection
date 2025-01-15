@@ -21,6 +21,7 @@
     "express": "^4.21.1",
     "fs": "0.0.1-security",
     "http": "0.0.1-security",
+    "joi": "^17.13.3",
     "knex": "^3.1.0",
     "mysql2": "^3.12.0",
     "openapi-to-postmanv2": "^4.24.0",

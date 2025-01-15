@@ -1,6 +1,6 @@
 import express, {Express} from 'express';
 
-import config from '@/controllers/config';
+import config from '@/config';
 import indexLoader from '@/loaders';
 
 const port = config.port;

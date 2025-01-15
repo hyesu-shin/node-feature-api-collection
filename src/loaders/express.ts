@@ -3,10 +3,10 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 // config
-import config from '@/controllers/config';
+import config from '@/config';
 
 import indexRouter from '@/apis';
-import errorHandler from '@/middlewares/errorHandler';
+import errorHandler from '@/middlewares/error.middleware';
 
 // import {morganMiddleware} from '@/middlewares/logs/logger';
 

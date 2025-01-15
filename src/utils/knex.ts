@@ -1,6 +1,6 @@
 import {knex} from 'knex';
 
-import config from '@/controllers/config';
+import config from '@/config';
 
 type knexConfigType = {
     [anyKeyword: string]: any;

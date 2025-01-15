@@ -1,76 +1,50 @@
-import {Container} from 'typedi';
-import {Request, Response, NextFunction, RequestHandler} from 'express';
+import {Container, Service} from 'typedi';
 
+import IndexController from '@/controllers';
 import ItemsService from '@/features/items/items.service';
 
 const itemsService: ItemsService = Container.get(ItemsService);
 
-const getItems: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const result = await itemsService.getItems(req);
-    if (result.code !== 'ok') {
-      return next(result);
+@Service()
+class ItemsController extends IndexController {
+    constructor() {
+      super();
     }
-    res.status(200).json(result);
-  } catch (err) {
-    next(err);
-  }
+
+    getItems() {
+      return this.runController(async (req) => {
+        const params = this.parseQuery(req);
+        return await itemsService.getItems(params);
+      });
+    }
+  
+    getItemsById() {
+      return this.runController(async (req) => {
+        const params = this.parseParam(req);
+        return await itemsService.getItemsById(params);
+      });
+    };
+  
+    addItems() {
+      return this.runController(async (req) => {
+        const params = this.parseBody(req);
+        return await itemsService.addItems(params);
+      });
+    };
+  
+    modifyItems() {
+      return this.runController(async (req) => {
+        const params = this.parseParamAndBody(req);
+        return await itemsService.modifyItems(params);
+      });
+    }
+    
+    deleteItems() {
+      return this.runController(async (req) => {
+        const params = this.parseParam(req)
+        return await itemsService.deleteItems(params);
+      });
+    }
 }
 
-const getItemsById: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const result = await itemsService.getItems(req);
-    if (result.code !== 'ok') {
-      return next(result);
-    }
-    res.status(200).json(result);
-  } catch (err) {
-    next(err);
-  }
-}
-
-const addItems: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const result = await itemsService.getItems(req);
-    if (result.code !== 'ok') {
-      return next(result);
-    }
-    res.status(200).json(result);
-  } catch (err) {
-    next(err);
-  }
-}
-
-const modifyItems: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const result = await itemsService.getItems(req);
-    if (result.code !== 'ok') {
-      return next(result);
-    }
-    res.status(200).json(result);
-  } catch (err) {
-    next(err);
-  }
-}
-
-const deleteItems: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const result = await itemsService.getItems(req);
-    if (result.code !== 'ok') {
-      return next(result);
-    }
-    res.status(200).json(result);
-  } catch (err) {
-    next(err);
-  }
-}
-
-
-
-export default {
-  getItems,
-  getItemsById,
-  addItems,
-  modifyItems,
-  deleteItems,
-};
+export default ItemsController;

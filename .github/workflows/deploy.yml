@@ -6,7 +6,6 @@
     push:
       branches:
         - master
-        - develop
 
   permissions:
     id-token: write
@@ -16,7 +15,7 @@
     deploy:
       name: deploy
       runs-on: ubuntu-latest
-      environment: production
+      environment: development
 
       steps:
         - name: check out the code

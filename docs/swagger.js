@@ -7,7 +7,7 @@ const doc = {
     title: 'node-feature-api-collection',
     description: 'node-feature-api-collection API documentation using swagger-autogen',
   },
-  host: 'localhost:3000',
+  host: 'https://dev-api.inmyhands.site',
   basePath: '/api/v1',
   schemes: ['http'],
 };

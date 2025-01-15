@@ -19,34 +19,34 @@ export default (err: any, req: Request, res: Response) => {
     const result: object = err.result ? err.result : {};
     const code: string = err.code ? err.code : 'ER0000';
     switch (code) {
-        case 'ER0001':
-            message = '필수 파라미터가 누락되었습니다';
-            statusCode = 400;
-            break;
-        case 'ER0002':
-            message = '회원 정보가 존재하지 않습니다';
-            statusCode = 400;
-            break;
         case 'ER0004':
-            message = 'no authorized';
-            statusCode = 401;
-            break;
+          message = 'no authorized';
+          statusCode = 401;
+          break;
+        case 'ER0005':
+          message = 'insert failed';
+          statusCode = 400;
+          break;
         case 'ER0006':
-            message = '파라미터가 존재하지 않습니다';
-            statusCode = 400;
-            break;
+          message = 'update failed';
+          statusCode = 400;
+          break;
+        case 'ER0007':
+          message = 'delete failed';
+          statusCode = 400;
+          break;
         default:
-            message = '서버 에러가 발생했습니다';
-            break;
+          message = 'unknown error';
+          break;
     }
 
     const returnMessage = err.message ? err.message : message;
 
     return res
-        .status(statusCode)
-        .json({
-            code,
-            message: returnMessage,
-            result
-        });
+      .status(statusCode)
+      .json({
+          code,
+          message: returnMessage,
+          result
+      });
 };
