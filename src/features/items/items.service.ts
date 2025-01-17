@@ -16,7 +16,7 @@ class ItemsService extends IndexService {
       return this.sendToResult(result, true);
     }
 
-    async getItemsById(params: SelectParams) {
+    async getItemById(params: SelectParams) {
       const result = await this.itemsModel.selectItems(params);
       return this.sendToResult(result, true);
     }

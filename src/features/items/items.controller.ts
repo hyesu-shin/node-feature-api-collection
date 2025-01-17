@@ -18,10 +18,10 @@ class ItemsController extends IndexController {
       });
     }
   
-    getItemsById() {
+    getItemById() {
       return this.runController(async (req) => {
         const params = this.parseParam(req);
-        return await itemsService.getItemsById(params);
+        return await itemsService.getItemById(params);
       });
     };
   

@@ -17,7 +17,7 @@ Converter.convert({ type: 'string', data: openapiData },
       // Base URL 교체
       postmanCollection.variable = [
         {
-          "key": "base_url",
+          "key": "baseUrl",
           "value": "https://dev-api.inmyhands.site"
         }
       ];
@@ -25,7 +25,7 @@ Converter.convert({ type: 'string', data: openapiData },
 
       postmanCollection.collection.item.forEach((item) => {
         if (item.request && item.request.url && item.request.url.raw) {
-          item.request.url.raw = `{{base_url}}${item.request.url.raw.replace(/^https?:\/\/[^/]+/, '')}`;
+          item.request.url.raw = `{{baseUrl}}${item.request.url.raw.replace(/^https?:\/\/[^/]+/, '')}`;
         }
       });
 

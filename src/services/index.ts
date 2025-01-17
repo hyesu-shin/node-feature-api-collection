@@ -13,7 +13,7 @@ const errorMapping: { [key: number]: any } = {
   1146: { code: 'ER1146', message: '존재하지 않는 테이블입니다' },
   1525: { code: 'ER1525', message: '열의 데이터 타입이 일치하지 않습니다' },
   1064: { code: 'ER1064', message: 'SQL 문법 오류' },
-  1052: { code: 'ER1052', message: '테이블 컬럼 명시 필요' }
+  1052: { code: 'ER1052', message: '테이블 컬럼 명시 필요' },
 }
 
 export default class IndexService {
@@ -25,11 +25,13 @@ export default class IndexService {
       successMessage: string = 'success', 
     ) {
 
-      console.log(result);
       if (result.errno) {
         return errorMapping[result.errno] || { success: false, code: 'ER0000', message: '알 수 없는 오류', result };
       }
 
+      if (result.errCode) {
+        return { success: false, code: result.errCode};
+      }
       
       if (result === 0) {
         let code;
