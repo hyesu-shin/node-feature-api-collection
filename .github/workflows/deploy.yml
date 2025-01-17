@@ -85,7 +85,7 @@
                 --parameters 'commands=[
                 "aws s3 cp s3://${{ secrets.S3_BUCKET_NAME }}/dev-api.tar.gz /home/ec2-user/docker-nginx-web/dev-api/dev-api.tar.gz", 
                 "cd /home/ec2-user/docker-nginx-web/dev-api", 
-                "tar --overwrite -xzf dev-api.tar.gz", 
+                "sudo tar --overwrite -xzf dev-api.tar.gz", 
                 "sudo rm -rf dev-api.tar.gz", 
                 "docker-compose stop dev-api-server", 
                 "nohup docker-compose up -d --build dev-api-server > /dev/null 2>&1 &"
