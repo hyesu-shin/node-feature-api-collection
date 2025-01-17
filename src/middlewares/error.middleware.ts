@@ -19,6 +19,14 @@ export default (err: any, req: Request, res: Response) => {
     const result: object = err.result ? err.result : {};
     const code: string = err.code ? err.code : 'ER0000';
     switch (code) {
+        case 'ER0001':
+          message = 'invalid identifier';
+          statusCode = 401;
+          break;
+        case 'ER0002':
+          message = 'invalid password';
+          statusCode = 401;
+          break;
         case 'ER0004':
           message = 'no authorized';
           statusCode = 401;

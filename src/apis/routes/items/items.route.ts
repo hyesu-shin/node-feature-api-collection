@@ -7,7 +7,7 @@ import {
   validateAddItems,
   validateModifyItems,
   validateDeleteItems,
-} from '@/middlewares/validations/items.validation';
+} from '@/features/items/items.validation';
 
 const router: Router = express.Router();
 const itemsController = new ItemsController();
@@ -15,19 +15,16 @@ const itemsController = new ItemsController();
 export default ({ app } : { app: Router }) => {
   app.use('/api/v1', router);
 
-  // #swagger.description = 'dd'
   router.get(
     '/items', 
     validateGetItems,
-    (req, res, next) => {
-      return itemsController.getItems()(req, res, next);
-    }
+    itemsController.getItems(),
   );
 
   router.get(
     '/items/:id',
     validateGetItemById,
-    itemsController.getItemsById(),
+    itemsController.getItemById(),
   );
 
   router.post(

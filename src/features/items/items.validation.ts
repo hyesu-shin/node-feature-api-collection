@@ -1,7 +1,7 @@
 import {Request, Response, NextFunction} from 'express';
 import Joi from 'joi';
 
-import {validateBodyRequest, validateParamsRequest, validateQueryRequest} from './index';
+import {validateBodyRequest, validateParamsRequest, validateQueryRequest} from '@/middlewares/validation.middleware.ts';
 
 export const validateGetItems = (
   req: Request, 
@@ -26,8 +26,8 @@ export const validateGetItemById = (
     id: Joi.number().required(),
   });
 
-  const isQueryValid: any = validateParamsRequest(paramSchema, req, res);
-  if (isQueryValid) next();
+  const isParamValid: any = validateParamsRequest(paramSchema, req, res);
+  if (isParamValid) next();
 }
 
 export const validateAddItems = (
