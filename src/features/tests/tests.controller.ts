@@ -16,9 +16,8 @@ class TestsController extends IndexController {
   getTest() {
     return this.runController(async (req) => {
       return {
-        code: 'ok',
-        message: 'Test successful',
-      };
+        success: true,
+      }
     });
   }
 
@@ -29,9 +28,8 @@ class TestsController extends IndexController {
     return this.runController(async (req) => {
       const result = await testsService.goTest();
       return {
-        code: 'ok',
-        result,
-      };
+        success: true,
+      }
     });
   }
 
@@ -42,9 +40,8 @@ class TestsController extends IndexController {
     return this.runController(async (req) => {
       console.log('Received Webhook:', req.body);
       return {
-        code: 'ok',
-        result: JSON.stringify(req.body),
-      };
+        success: true,
+      }
     });
   }
 }
